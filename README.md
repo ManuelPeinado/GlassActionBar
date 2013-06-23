@@ -38,7 +38,8 @@ Acknowledgements
 
 * Thanks to [Nicolas Pometuy][1] for sharing the techniques that make this library possible.
 * The gaussian blur effect is based on code by [Mario Klingemann][5] which was ported to Android by [Yahel Bouaziz][6].
-* Cat icon by [Davic Vignoni][7].
+* NotifyingScrollView class by [Cyril Mottier][7].
+* Cat icon by [Davic Vignoni][8].
 
 Who's using it
 --------------
@@ -90,5 +91,6 @@ License
  [4]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample/src/com/manuelpeinado/glassactionbardemo/MainActivity.java
  [5]: http://www.quasimondo.com/
  [6]: https://plus.google.com/107352914145283602089
- [7]: http://www.icon-king.com/
+ [7]: http://www.cyrilmottier.com
+ [8]: http://www.icon-king.com/
 
