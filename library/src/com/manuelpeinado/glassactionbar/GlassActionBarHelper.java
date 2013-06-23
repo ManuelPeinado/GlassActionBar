@@ -17,7 +17,6 @@ package com.manuelpeinado.glassactionbar;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,12 +85,8 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         content.measure(widthMeasureSpec, heightMeasureSpec);
         width = frame.getWidth();
         height = content.getMeasuredHeight();
-        computeBlurOverlay();
-        updateBlurOverlay(getInitialScrollPosition(), false);
-    }
-
-    private int getInitialScrollPosition() {
-        return scrollView != null ? scrollView.getScrollY() : 0;
+        lastScrollPosition = scrollView != null ? scrollView.getScrollY() : 0; 
+        invalidate();
     }
 
     private void computeBlurOverlay() {
@@ -107,12 +102,9 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
             if (verbose) Log.v(TAG, "computeBlurOverlay() - scroll position is " + scrollPosition);
         }
         long start = System.nanoTime();
-        int heightCopy = content.getHeight();
-        content.layout(0, 0, width, height);
-        Bitmap original = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(original);
-        content.draw(c);
-        scaled = Bitmap.createScaledBitmap(original, width / DOWN_SAMPLING, height / DOWN_SAMPLING, true);
+
+        scaled = Utils.drawViewToBitmap(content, width, height, DOWN_SAMPLING);
+
         long delta = System.nanoTime() - start;
         if (verbose) Log.v(TAG, "computeBlurOverlay() - drawing layout to canvas took " + delta/1e6f + " ms");
         if (scrollView != null) {
@@ -121,8 +113,6 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         } else {
             if (verbose) Log.v(TAG, "computeBlurOverlay() - not starting blur task because scrollView is null");
         }
-        original.recycle();
-        content.layout(0, 0, width, heightCopy);
         if (scrollView != null) {
             if (verbose) Log.v(TAG, "computeBlurOverlay() - restoring scroll from " + scrollView.getScrollY() + " to " + scrollPosition);
             scrollView.scrollTo(0, scrollPosition);
