@@ -18,6 +18,7 @@ public class BlurTask {
     }
 
     public BlurTask(Listener listener, Bitmap source) {
+        this.listener = listener;
         this.source = source;
         canvas = new Canvas(source);
         startTask();
@@ -37,9 +38,7 @@ public class BlurTask {
                     canvas.drawBitmap(blurred, 0, 0, null);
                     blurred.recycle();
                     finished = true;
-                    if (listener != null) {
-                        listener.onBlurOperationFinished();
-                    }
+                    listener.onBlurOperationFinished();
                 }
             };
         }
