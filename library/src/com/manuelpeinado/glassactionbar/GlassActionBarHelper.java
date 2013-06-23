@@ -80,6 +80,10 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     @Override
     public void onGlobalLayout() {
         if (verbose) Log.v(TAG, "onGlobalLayout()");
+        if (width != 0) {
+            if (verbose) Log.v(TAG, "onGlobalLayout() - returning because not first time it's called");
+            return;
+        }
         int widthMeasureSpec = MeasureSpec.makeMeasureSpec(frame.getWidth(), MeasureSpec.AT_MOST);
         int heightMeasureSpec = MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT, MeasureSpec.EXACTLY);
         content.measure(widthMeasureSpec, heightMeasureSpec);
@@ -124,7 +128,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
             if (verbose) Log.v(TAG, "startBlurTask() - task was already running, canceling it");
             blurTask.cancel();
         }
-        blurTask = new BlurTask(this, scaled);
+        blurTask = new BlurTask(frame.getContext(), this, scaled);
     }
 
     private void updateBlurOverlay(int top, boolean force) {
@@ -153,7 +157,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
             blurredBitmap = actionBarSection;
         } else {
             if (verbose) Log.v(TAG, "updateBlurOverlay() - blur task not finished, blurring content under action bar");
-            blurredBitmap = Blur.apply(actionBarSection);
+            blurredBitmap = Blur.apply(frame.getContext(), actionBarSection);
         }
         Bitmap enlarged = Bitmap.createScaledBitmap(blurredBitmap, width, actionBarHeight, false);
         blurredBitmap.recycle();

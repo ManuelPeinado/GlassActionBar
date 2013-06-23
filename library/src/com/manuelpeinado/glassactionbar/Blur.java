@@ -1,241 +1,265 @@
 package com.manuelpeinado.glassactionbar;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build.VERSION;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 
+// Code borrowed from Nicolas Pomepuy
+// https://github.com/PomepuyN/BlurEffectForAndroidDesign
 public class Blur {
-	private static final int DEFAULT_RADIUS = 12;
-	
-	public static Bitmap apply(Bitmap sentBitmap) {
-	    return apply(sentBitmap, DEFAULT_RADIUS);
-	}
-	
-	public static Bitmap apply(Bitmap sentBitmap, int radius) {
+    private static final int DEFAULT_RADIUS = 12;
 
-		// Stack Blur v1.0 from
-		// http://www.quasimondo.com/StackBlurForCanvas/StackBlurDemo.html
-		//
-		// Java Author: Mario Klingemann <mario at quasimondo.com>
-		// http://incubator.quasimondo.com
-		// created Feburary 29, 2004
-		// Android port : Yahel Bouaziz <yahel at kayenko.com>
-		// http://www.kayenko.com
-		// ported april 5th, 2012
+    public static Bitmap apply(Context context, Bitmap sentBitmap) {
+        return apply(context, sentBitmap, DEFAULT_RADIUS);
+    }
 
-		// This is a compromise between Gaussian Blur and Box blur
-		// It creates much better looking blurs than Box Blur, but is
-		// 7x faster than my Gaussian Blur implementation.
-		//
-		// I called it Stack Blur because this describes best how this
-		// filter works internally: it creates a kind of moving stack
-		// of colors whilst scanning through the image. Thereby it
-		// just has to add one new block of color to the right side
-		// of the stack and remove the leftmost color. The remaining
-		// colors on the topmost layer of the stack are either added on
-		// or reduced by one, depending on if they are on the right or
-		// on the left side of the stack.
-		//
-		// If you are using this algorithm in your code please add
-		// the following line:
-		//
-		// Stack Blur Algorithm by Mario Klingemann <mario@quasimondo.com>
+    @SuppressLint("NewApi")
+    public static Bitmap apply(Context context, Bitmap sentBitmap, int radius) {
+        if (VERSION.SDK_INT > 16) {
+            Bitmap bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
 
-		Bitmap bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
+            final RenderScript rs = RenderScript.create(context);
+            final Allocation input = Allocation.createFromBitmap(rs, sentBitmap, Allocation.MipmapControl.MIPMAP_NONE,
+                    Allocation.USAGE_SCRIPT);
+            final Allocation output = Allocation.createTyped(rs, input.getType());
+            final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+            script.setRadius(radius /* e.g. 3.f */);
+            script.setInput(input);
+            script.forEach(output);
+            output.copyTo(bitmap);
+            return bitmap;
+        }
 
-		if (radius < 1) {
-			return (null);
-		}
+        // Stack Blur v1.0 from
+        // http://www.quasimondo.com/StackBlurForCanvas/StackBlurDemo.html
+        //
+        // Java Author: Mario Klingemann <mario at quasimondo.com>
+        // http://incubator.quasimondo.com
+        // created Feburary 29, 2004
+        // Android port : Yahel Bouaziz <yahel at kayenko.com>
+        // http://www.kayenko.com
+        // ported april 5th, 2012
 
-		int w = bitmap.getWidth();
-		int h = bitmap.getHeight();
+        // This is a compromise between Gaussian Blur and Box blur
+        // It creates much better looking blurs than Box Blur, but is
+        // 7x faster than my Gaussian Blur implementation.
+        //
+        // I called it Stack Blur because this describes best how this
+        // filter works internally: it creates a kind of moving stack
+        // of colors whilst scanning through the image. Thereby it
+        // just has to add one new block of color to the right side
+        // of the stack and remove the leftmost color. The remaining
+        // colors on the topmost layer of the stack are either added on
+        // or reduced by one, depending on if they are on the right or
+        // on the left side of the stack.
+        //
+        // If you are using this algorithm in your code please add
+        // the following line:
+        //
+        // Stack Blur Algorithm by Mario Klingemann <mario@quasimondo.com>
 
-		int[] pix = new int[w * h];
-		bitmap.getPixels(pix, 0, w, 0, 0, w, h);
+        Bitmap bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
 
-		int wm = w - 1;
-		int hm = h - 1;
-		int wh = w * h;
-		int div = radius + radius + 1;
+        if (radius < 1) {
+            return (null);
+        }
 
-		int r[] = new int[wh];
-		int g[] = new int[wh];
-		int b[] = new int[wh];
-		int rsum, gsum, bsum, x, y, i, p, yp, yi, yw;
-		int vmin[] = new int[Math.max(w, h)];
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
 
-		int divsum = (div + 1) >> 1;
-		divsum *= divsum;
-		int dv[] = new int[256 * divsum];
-		for (i = 0; i < 256 * divsum; i++) {
-			dv[i] = (i / divsum);
-		}
+        int[] pix = new int[w * h];
+        bitmap.getPixels(pix, 0, w, 0, 0, w, h);
 
-		yw = yi = 0;
+        int wm = w - 1;
+        int hm = h - 1;
+        int wh = w * h;
+        int div = radius + radius + 1;
 
-		int[][] stack = new int[div][3];
-		int stackpointer;
-		int stackstart;
-		int[] sir;
-		int rbs;
-		int r1 = radius + 1;
-		int routsum, goutsum, boutsum;
-		int rinsum, ginsum, binsum;
+        int r[] = new int[wh];
+        int g[] = new int[wh];
+        int b[] = new int[wh];
+        int rsum, gsum, bsum, x, y, i, p, yp, yi, yw;
+        int vmin[] = new int[Math.max(w, h)];
 
-		for (y = 0; y < h; y++) {
-			rinsum = ginsum = binsum = routsum = goutsum = boutsum = rsum = gsum = bsum = 0;
-			for (i = -radius; i <= radius; i++) {
-				p = pix[yi + Math.min(wm, Math.max(i, 0))];
-				sir = stack[i + radius];
-				sir[0] = (p & 0xff0000) >> 16;
-				sir[1] = (p & 0x00ff00) >> 8;
-				sir[2] = (p & 0x0000ff);
-				rbs = r1 - Math.abs(i);
-				rsum += sir[0] * rbs;
-				gsum += sir[1] * rbs;
-				bsum += sir[2] * rbs;
-				if (i > 0) {
-					rinsum += sir[0];
-					ginsum += sir[1];
-					binsum += sir[2];
-				} else {
-					routsum += sir[0];
-					goutsum += sir[1];
-					boutsum += sir[2];
-				}
-			}
-			stackpointer = radius;
+        int divsum = (div + 1) >> 1;
+        divsum *= divsum;
+        int dv[] = new int[256 * divsum];
+        for (i = 0; i < 256 * divsum; i++) {
+            dv[i] = (i / divsum);
+        }
 
-			for (x = 0; x < w; x++) {
+        yw = yi = 0;
 
-				r[yi] = dv[rsum];
-				g[yi] = dv[gsum];
-				b[yi] = dv[bsum];
+        int[][] stack = new int[div][3];
+        int stackpointer;
+        int stackstart;
+        int[] sir;
+        int rbs;
+        int r1 = radius + 1;
+        int routsum, goutsum, boutsum;
+        int rinsum, ginsum, binsum;
 
-				rsum -= routsum;
-				gsum -= goutsum;
-				bsum -= boutsum;
+        for (y = 0; y < h; y++) {
+            rinsum = ginsum = binsum = routsum = goutsum = boutsum = rsum = gsum = bsum = 0;
+            for (i = -radius; i <= radius; i++) {
+                p = pix[yi + Math.min(wm, Math.max(i, 0))];
+                sir = stack[i + radius];
+                sir[0] = (p & 0xff0000) >> 16;
+                sir[1] = (p & 0x00ff00) >> 8;
+                sir[2] = (p & 0x0000ff);
+                rbs = r1 - Math.abs(i);
+                rsum += sir[0] * rbs;
+                gsum += sir[1] * rbs;
+                bsum += sir[2] * rbs;
+                if (i > 0) {
+                    rinsum += sir[0];
+                    ginsum += sir[1];
+                    binsum += sir[2];
+                } else {
+                    routsum += sir[0];
+                    goutsum += sir[1];
+                    boutsum += sir[2];
+                }
+            }
+            stackpointer = radius;
 
-				stackstart = stackpointer - radius + div;
-				sir = stack[stackstart % div];
+            for (x = 0; x < w; x++) {
 
-				routsum -= sir[0];
-				goutsum -= sir[1];
-				boutsum -= sir[2];
+                r[yi] = dv[rsum];
+                g[yi] = dv[gsum];
+                b[yi] = dv[bsum];
 
-				if (y == 0) {
-					vmin[x] = Math.min(x + radius + 1, wm);
-				}
-				p = pix[yw + vmin[x]];
+                rsum -= routsum;
+                gsum -= goutsum;
+                bsum -= boutsum;
 
-				sir[0] = (p & 0xff0000) >> 16;
-				sir[1] = (p & 0x00ff00) >> 8;
-				sir[2] = (p & 0x0000ff);
+                stackstart = stackpointer - radius + div;
+                sir = stack[stackstart % div];
 
-				rinsum += sir[0];
-				ginsum += sir[1];
-				binsum += sir[2];
+                routsum -= sir[0];
+                goutsum -= sir[1];
+                boutsum -= sir[2];
 
-				rsum += rinsum;
-				gsum += ginsum;
-				bsum += binsum;
+                if (y == 0) {
+                    vmin[x] = Math.min(x + radius + 1, wm);
+                }
+                p = pix[yw + vmin[x]];
 
-				stackpointer = (stackpointer + 1) % div;
-				sir = stack[(stackpointer) % div];
+                sir[0] = (p & 0xff0000) >> 16;
+                sir[1] = (p & 0x00ff00) >> 8;
+                sir[2] = (p & 0x0000ff);
 
-				routsum += sir[0];
-				goutsum += sir[1];
-				boutsum += sir[2];
+                rinsum += sir[0];
+                ginsum += sir[1];
+                binsum += sir[2];
 
-				rinsum -= sir[0];
-				ginsum -= sir[1];
-				binsum -= sir[2];
+                rsum += rinsum;
+                gsum += ginsum;
+                bsum += binsum;
 
-				yi++;
-			}
-			yw += w;
-		}
-		for (x = 0; x < w; x++) {
-			rinsum = ginsum = binsum = routsum = goutsum = boutsum = rsum = gsum = bsum = 0;
-			yp = -radius * w;
-			for (i = -radius; i <= radius; i++) {
-				yi = Math.max(0, yp) + x;
+                stackpointer = (stackpointer + 1) % div;
+                sir = stack[(stackpointer) % div];
 
-				sir = stack[i + radius];
+                routsum += sir[0];
+                goutsum += sir[1];
+                boutsum += sir[2];
 
-				sir[0] = r[yi];
-				sir[1] = g[yi];
-				sir[2] = b[yi];
+                rinsum -= sir[0];
+                ginsum -= sir[1];
+                binsum -= sir[2];
 
-				rbs = r1 - Math.abs(i);
+                yi++;
+            }
+            yw += w;
+        }
+        for (x = 0; x < w; x++) {
+            rinsum = ginsum = binsum = routsum = goutsum = boutsum = rsum = gsum = bsum = 0;
+            yp = -radius * w;
+            for (i = -radius; i <= radius; i++) {
+                yi = Math.max(0, yp) + x;
 
-				rsum += r[yi] * rbs;
-				gsum += g[yi] * rbs;
-				bsum += b[yi] * rbs;
+                sir = stack[i + radius];
 
-				if (i > 0) {
-					rinsum += sir[0];
-					ginsum += sir[1];
-					binsum += sir[2];
-				} else {
-					routsum += sir[0];
-					goutsum += sir[1];
-					boutsum += sir[2];
-				}
+                sir[0] = r[yi];
+                sir[1] = g[yi];
+                sir[2] = b[yi];
 
-				if (i < hm) {
-					yp += w;
-				}
-			}
-			yi = x;
-			stackpointer = radius;
-			for (y = 0; y < h; y++) {
-				// Preserve alpha channel: ( 0xff000000 & pix[yi] )
-				pix[yi] = (0xff000000 & pix[yi]) | (dv[rsum] << 16) | (dv[gsum] << 8) | dv[bsum];
+                rbs = r1 - Math.abs(i);
 
-				rsum -= routsum;
-				gsum -= goutsum;
-				bsum -= boutsum;
+                rsum += r[yi] * rbs;
+                gsum += g[yi] * rbs;
+                bsum += b[yi] * rbs;
 
-				stackstart = stackpointer - radius + div;
-				sir = stack[stackstart % div];
+                if (i > 0) {
+                    rinsum += sir[0];
+                    ginsum += sir[1];
+                    binsum += sir[2];
+                } else {
+                    routsum += sir[0];
+                    goutsum += sir[1];
+                    boutsum += sir[2];
+                }
 
-				routsum -= sir[0];
-				goutsum -= sir[1];
-				boutsum -= sir[2];
+                if (i < hm) {
+                    yp += w;
+                }
+            }
+            yi = x;
+            stackpointer = radius;
+            for (y = 0; y < h; y++) {
+                // Preserve alpha channel: ( 0xff000000 & pix[yi] )
+                pix[yi] = (0xff000000 & pix[yi]) | (dv[rsum] << 16) | (dv[gsum] << 8) | dv[bsum];
 
-				if (x == 0) {
-					vmin[y] = Math.min(y + r1, hm) * w;
-				}
-				p = x + vmin[y];
+                rsum -= routsum;
+                gsum -= goutsum;
+                bsum -= boutsum;
 
-				sir[0] = r[p];
-				sir[1] = g[p];
-				sir[2] = b[p];
+                stackstart = stackpointer - radius + div;
+                sir = stack[stackstart % div];
 
-				rinsum += sir[0];
-				ginsum += sir[1];
-				binsum += sir[2];
+                routsum -= sir[0];
+                goutsum -= sir[1];
+                boutsum -= sir[2];
 
-				rsum += rinsum;
-				gsum += ginsum;
-				bsum += binsum;
+                if (x == 0) {
+                    vmin[y] = Math.min(y + r1, hm) * w;
+                }
+                p = x + vmin[y];
 
-				stackpointer = (stackpointer + 1) % div;
-				sir = stack[stackpointer];
+                sir[0] = r[p];
+                sir[1] = g[p];
+                sir[2] = b[p];
 
-				routsum += sir[0];
-				goutsum += sir[1];
-				boutsum += sir[2];
+                rinsum += sir[0];
+                ginsum += sir[1];
+                binsum += sir[2];
 
-				rinsum -= sir[0];
-				ginsum -= sir[1];
-				binsum -= sir[2];
+                rsum += rinsum;
+                gsum += ginsum;
+                bsum += binsum;
 
-				yi += w;
-			}
-		}
+                stackpointer = (stackpointer + 1) % div;
+                sir = stack[stackpointer];
 
-		bitmap.setPixels(pix, 0, w, 0, 0, w, h);
-		return (bitmap);
-	}
+                routsum += sir[0];
+                goutsum += sir[1];
+                boutsum += sir[2];
+
+                rinsum -= sir[0];
+                ginsum -= sir[1];
+                binsum -= sir[2];
+
+                yi += w;
+            }
+        }
+
+        bitmap.setPixels(pix, 0, w, 0, 0, w, h);
+        return (bitmap);
+    }
 
 }

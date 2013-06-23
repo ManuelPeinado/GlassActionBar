@@ -1,8 +1,10 @@
 package com.manuelpeinado.glassactionbar;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class BlurTask {
     protected static final String TAG = "BlurTask";
@@ -11,12 +13,14 @@ public class BlurTask {
     private AsyncTask<Void, Void, Void> task;
     private Bitmap blurred;
     private Listener listener;
+    private Context context;
 
     public interface Listener {
         void onBlurOperationFinished();
     }
 
-    public BlurTask(Listener listener, Bitmap source) {
+    public BlurTask(Context context, Listener listener, Bitmap source) {
+        this.context = context;
         this.listener = listener;
         this.source = source;
         canvas = new Canvas(source);
@@ -47,7 +51,10 @@ public class BlurTask {
             // Probably indicates we've reached the end.
             return;
         }
-        blurred = Blur.apply(source);
+        long start = System.nanoTime();
+        blurred = Blur.apply(context, source);
+        long delta = System.nanoTime() - start;
+        Log.v("BlurTask", "Blurring took " + delta/1e6f + " ms"); 
     }
 
     public void cancel() {
