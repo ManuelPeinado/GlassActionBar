@@ -37,8 +37,8 @@ Acknowledgements
 --------------------
 
 * Thanks to [Nicolas Pometuy][1] for sharing the techniques that make this library possible.
-* The gaussian blur effect is based on code by [Mario Klingemann][5] which was ported to Android by [Yahel Bouaziz][5].
-* Cat icon by [Davic Vignoni](6).
+* The gaussian blur effect is based on code by [Mario Klingemann][5] which was ported to Android by [Yahel Bouaziz][6].
+* Cat icon by [Davic Vignoni](7).
 
 Who's using it
 --------------
@@ -87,7 +87,8 @@ License
  [1]: http://nicolaspomepuy.fr/?p=18
  [2]: https://raw.github.com/ManuelPeinado/GlassActionBar/master/art/readme_pic.png
  [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample
- [4]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample/src/com/manuelpeinado/fadingactionbardemo/MainActivity.java
- [5]: https://plus.google.com/107352914145283602089
- [6]: http://www.icon-king.com/
+ [4]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample/src/com/manuelpeinado/glassactionbardemo/MainActivity.java
+ [5]: http://www.quasimondo.com/
+ [6]: https://plus.google.com/107352914145283602089
+ [7]: http://www.icon-king.com/
 
