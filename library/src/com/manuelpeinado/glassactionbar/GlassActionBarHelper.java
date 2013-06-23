@@ -32,7 +32,7 @@ import com.cyrilmottier.android.translucentactionbar.NotifyingScrollView;
 import com.cyrilmottier.android.translucentactionbar.NotifyingScrollView.OnScrollChangedListener;
 import com.manuelpeinado.glassactionbar.R;
 
-public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollChangedListener {
+public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollChangedListener, BlurTask.Listener {
     private int contentLayout;
     private FrameLayout frame;
     private View content;
@@ -41,6 +41,8 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     private int width;
     private int height;
     private Bitmap scaled;
+    private BlurTask blurTask;
+    private int lastScrollPosition;
     private static final int DOWN_SAMPLING = 3;
 
     public GlassActionBarHelper contentLayout(int layout) {
@@ -84,18 +86,25 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
             Canvas c = new Canvas(original);
             content.draw(c);
             scaled = Bitmap.createScaledBitmap(original, width / DOWN_SAMPLING, height / DOWN_SAMPLING, true);
+            startBlurTask();
             original.recycle();
             frame.requestLayout();
         }
     }
 
+    private void startBlurTask() {
+        blurTask = new BlurTask(this, scaled);
+    }
+
     private void updateBlurOverlay(int top) {
+        lastScrollPosition = top;
         if (top < 0) {
             top = 0;
         }
         Bitmap actionBarSection = Bitmap.createBitmap(scaled, 0, top / DOWN_SAMPLING, width / DOWN_SAMPLING,
                 actionBarHeight / DOWN_SAMPLING);
-        Bitmap blurredBitmap = Blur.apply(actionBarSection);
+        // Blur here until background finished (will make smooth jerky during the first seconds).
+        Bitmap blurredBitmap = blurTask.isFinished() ? actionBarSection : Blur.apply(actionBarSection);
         Bitmap enlarged = Bitmap.createScaledBitmap(blurredBitmap, width, actionBarHeight, false);
         blurredBitmap.recycle();
         actionBarSection.recycle();
@@ -105,6 +114,11 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     @Override
     public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
         updateBlurOverlay(t);
+    }
+
+    @Override
+    public void onBlurOperationFinished() {
+        updateBlurOverlay(lastScrollPosition);
     }
 
 }
