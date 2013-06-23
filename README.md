@@ -1,4 +1,4 @@
-FadingActionBar
+GlassActionBar
 ==================
 
 GlassActionBar is a tiny library which implements a glass-like effect for the action bar.
@@ -37,8 +37,8 @@ Acknowledgements
 --------------------
 
 * Thanks to [Nicolas Pometuy][1] for sharing the techniques that make this library possible.
-* The gaussian blur effect is based on code by [Mario Klingemann][4] which was ported to Android by [Yahel Bouaziz][5].
-
+* The gaussian blur effect is based on code by [Mario Klingemann][5] which was ported to Android by [Yahel Bouaziz][5].
+* Cat icon by [Davic Vignoni](6).
 
 Who's using it
 --------------
@@ -84,15 +84,10 @@ License
 
 
 
- [1]: http://cyrilmottier.com/2013/05/24/pushing-the-actionbar-to-the-next-level/
- [2]: https://raw.github.com/ManuelPeinado/FadingActionBar-Native
- [3]: https://raw.github.com/ManuelPeinado/FadingActionBar/master/art/readme_pic.png
- [4]: https://github.com/ManuelPeinado/FadingActionBar/tree/master/sample
- [5]: https://github.com/ManuelPeinado/FadingActionBar/blob/master/sample/src/com/manuelpeinado/fadingactionbar/demo/ScrollViewActivity.java
- https://plus.google.com/107352914145283602089
- [6]: https://github.com/ManuelPeinado/FadingActionBar/blob/master/sample/src/com/manuelpeinado/fadingactionbar/demo/ListViewActivity.java
- [7]: https://github.com/ManuelPeinado/FadingActionBar/blob/master/sample/src/com/manuelpeinado/fadingactionbar/demo/SampleFragment.java
- [8]: http://cyrilmottier.com
- [9]: https://github.com/antoniolg
-
+ [1]: http://nicolaspomepuy.fr/?p=18
+ [2]: https://raw.github.com/ManuelPeinado/GlassActionBar/master/art/readme_pic.png
+ [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample
+ [4]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample/src/com/manuelpeinado/fadingactionbardemo/MainActivity.java
+ [5]: https://plus.google.com/107352914145283602089
+ [6]: http://www.icon-king.com/
 
