@@ -25,27 +25,25 @@ public class BlurTask {
     }
 
     private void startTask() {
-        if (task == null) {
-            task = new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... args) {
-                    blurNextBatch();
-                    return null;
-                }
+        task = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... args) {
+                blurSourceBitmap();
+                return null;
+            }
 
-                @Override
-                protected void onPostExecute(Void result) {
-                    canvas.drawBitmap(blurred, 0, 0, null);
-                    blurred.recycle();
-                    finished = true;
-                    listener.onBlurOperationFinished();
-                }
-            };
-        }
+            @Override
+            protected void onPostExecute(Void result) {
+                canvas.drawBitmap(blurred, 0, 0, null);
+                blurred.recycle();
+                finished = true;
+                listener.onBlurOperationFinished();
+            }
+        };
         task.execute();
     }
 
-    private void blurNextBatch() {
+    private void blurSourceBitmap() {
         Bitmap section = source;
         if (section == null) {
             // Probably indicates we've reached the end.

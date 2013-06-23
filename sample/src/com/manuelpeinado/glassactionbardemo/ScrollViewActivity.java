@@ -21,7 +21,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.manuelpeinado.glassactionbar.GlassActionBarHelper;
 
-public class MainActivity extends SherlockActivity {
+public class ScrollViewActivity extends SherlockActivity {
 
     private GlassActionBarHelper helper;
 
@@ -29,7 +29,7 @@ public class MainActivity extends SherlockActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        helper = new GlassActionBarHelper().contentLayout(R.layout.activity_main);
+        helper = new GlassActionBarHelper().contentLayout(R.layout.activity_scrollview);
         setContentView(helper.createView(this));
     }
 

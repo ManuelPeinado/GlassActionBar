@@ -43,6 +43,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     private Bitmap scaled;
     private BlurTask blurTask;
     private int lastScrollPosition;
+    private boolean fixed = true;
     private static final int DOWN_SAMPLING = 3;
 
     public GlassActionBarHelper contentLayout(int layout) {
@@ -60,6 +61,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         blurredOverlay = (ImageView) frame.findViewById(R.id.blurredOverlay);
 
         if (content instanceof NotifyingScrollView) {
+            fixed = false;
             NotifyingScrollView scrollView = (NotifyingScrollView) content;
             scrollView.setOnScrollChangedListener(this);
         }
@@ -80,16 +82,19 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     }
 
     private void computeBlurOverlay() {
-        if (scaled == null) {
-            content.layout(0, 0, width, height);
-            Bitmap original = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            Canvas c = new Canvas(original);
-            content.draw(c);
-            scaled = Bitmap.createScaledBitmap(original, width / DOWN_SAMPLING, height / DOWN_SAMPLING, true);
-            startBlurTask();
-            original.recycle();
-            frame.requestLayout();
+        if (scaled != null) {
+            return;
         }
+        content.layout(0, 0, width, height);
+        Bitmap original = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(original);
+        content.draw(c);
+        scaled = Bitmap.createScaledBitmap(original, width / DOWN_SAMPLING, height / DOWN_SAMPLING, true);
+        if (!fixed) {
+            startBlurTask();
+        }
+        original.recycle();
+        frame.requestLayout();
     }
 
     private void startBlurTask() {
@@ -104,11 +109,15 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         Bitmap actionBarSection = Bitmap.createBitmap(scaled, 0, top / DOWN_SAMPLING, width / DOWN_SAMPLING,
                 actionBarHeight / DOWN_SAMPLING);
         // Blur here until background finished (will make smooth jerky during the first seconds).
-        Bitmap blurredBitmap = blurTask.isFinished() ? actionBarSection : Blur.apply(actionBarSection);
+        Bitmap blurredBitmap = isBlurTaskFinished() ? actionBarSection : Blur.apply(actionBarSection);
         Bitmap enlarged = Bitmap.createScaledBitmap(blurredBitmap, width, actionBarHeight, false);
         blurredBitmap.recycle();
         actionBarSection.recycle();
         blurredOverlay.setImageBitmap(enlarged);
+    }
+
+    private boolean isBlurTaskFinished() {
+        return blurTask != null && blurTask.isFinished();
     }
 
     @Override

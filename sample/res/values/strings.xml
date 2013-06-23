@@ -3,6 +3,8 @@
 
     <string name="app_name">GlassActionBarDemo</string>
     <string name="action_settings">Settings</string>
+    <string name="activity_title_scrollview">ScrollView sample</string>
+    <string name="activity_title_fixed_header">Fixed header sample</string>
     <string name="loren_ipsum">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</string>
 
 </resources>
