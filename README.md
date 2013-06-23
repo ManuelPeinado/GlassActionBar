@@ -18,9 +18,6 @@ Try out the sample application:
 
 Or browse the [source code of the sample application][3] for a complete example of use.
 
-Please keep in mind that the code of the library is not fully optimized at the moment, and won't probably work smoothly in old devices. Future versions of the library will hopefully fix this.
-
-
 Including in your project
 -------------------------
 
