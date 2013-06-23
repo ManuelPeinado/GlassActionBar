@@ -38,7 +38,7 @@ Acknowledgements
 
 * Thanks to [Nicolas Pometuy][1] for sharing the techniques that make this library possible.
 * The gaussian blur effect is based on code by [Mario Klingemann][5] which was ported to Android by [Yahel Bouaziz][6].
-* Cat icon by [Davic Vignoni](7).
+* Cat icon by [Davic Vignoni][7].
 
 Who's using it
 --------------
