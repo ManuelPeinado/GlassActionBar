@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="TranslucentActionBar" parent="Widget.Sherlock.ActionBar">
+        <item name="android:background">@drawable/ab_transparent</item>
+        <item name="background">@drawable/ab_transparent</item>
+    </style>
+
+</resources>
