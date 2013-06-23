@@ -43,7 +43,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     private Bitmap scaled;
     private BlurTask blurTask;
     private int lastScrollPosition;
-    private boolean fixed = true;
+    private NotifyingScrollView scrollView;
     private static final int DOWN_SAMPLING = 3;
 
     public GlassActionBarHelper contentLayout(int layout) {
@@ -61,8 +61,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         blurredOverlay = (ImageView) frame.findViewById(R.id.blurredOverlay);
 
         if (content instanceof NotifyingScrollView) {
-            fixed = false;
-            NotifyingScrollView scrollView = (NotifyingScrollView) content;
+            scrollView = (NotifyingScrollView) content;
             scrollView.setOnScrollChangedListener(this);
         }
 
@@ -78,7 +77,11 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         width = frame.getWidth();
         height = content.getMeasuredHeight();
         computeBlurOverlay();
-        updateBlurOverlay(0);
+        updateBlurOverlay(getInitialScrollPosition());
+    }
+
+    private int getInitialScrollPosition() {
+        return scrollView != null ? scrollView.getScrollY() : 0;
     }
 
     private void computeBlurOverlay() {
@@ -90,7 +93,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         Canvas c = new Canvas(original);
         content.draw(c);
         scaled = Bitmap.createScaledBitmap(original, width / DOWN_SAMPLING, height / DOWN_SAMPLING, true);
-        if (!fixed) {
+        if (scrollView != null) {
             startBlurTask();
         }
         original.recycle();
