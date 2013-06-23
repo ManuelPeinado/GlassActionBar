@@ -3,7 +3,7 @@ GlassActionBar
 
 GlassActionBar is a tiny library which implements a glass-like effect for the action bar.
 
-This library is based on techniques outlined by Nicolas Pometuy in [a recent blog post][1].
+This library is based on techniques outlined by Nicolas Pomepuy in [a recent blog post][1].
 
 For reasons of backwards compatibility this library relies on ActionBarSherlock. Native action bar support is in the works.
 
@@ -36,7 +36,7 @@ Using the library is really simple, just look at the source code of the [provide
 Acknowledgements
 --------------------
 
-* Thanks to [Nicolas Pometuy][1] for sharing the techniques that make this library possible.
+* Thanks to [Nicolas Pomepuy][1] for sharing the techniques that make this library possible.
 * The gaussian blur effect is based on code by [Mario Klingemann][5] which was ported to Android by [Yahel Bouaziz][6].
 * NotifyingScrollView class by [Cyril Mottier][7].
 * Cat icon by [Davic Vignoni][8].
