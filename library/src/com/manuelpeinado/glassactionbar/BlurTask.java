@@ -11,7 +11,6 @@ public class BlurTask {
     private AsyncTask<Void, Void, Void> task;
     private Bitmap blurred;
     private Listener listener;
-    private boolean finished;
 
     public interface Listener {
         void onBlurOperationFinished();
@@ -36,7 +35,6 @@ public class BlurTask {
             protected void onPostExecute(Void result) {
                 canvas.drawBitmap(blurred, 0, 0, null);
                 blurred.recycle();
-                finished = true;
                 listener.onBlurOperationFinished();
             }
         };
@@ -52,7 +50,10 @@ public class BlurTask {
         blurred = Blur.apply(source);
     }
 
-    public boolean isFinished() {
-        return finished;
+    public void cancel() {
+        if (task != null) {
+            task.cancel(true);
+        }
+        task = null;
     }
 }

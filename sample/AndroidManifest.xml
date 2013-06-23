@@ -23,13 +23,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/AppTheme.TranslucentActionBar"
             android:name="com.manuelpeinado.glassactionbardemo.ScrollViewActivity"
-            android:label="@string/activity_title_scrollview" />
+            android:label="@string/activity_title_scrollview"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
         <activity
-            android:theme="@style/AppTheme.TranslucentActionBar"
             android:name="com.manuelpeinado.glassactionbardemo.FixedHeaderActivity"
-            android:label="@string/activity_title_fixed_header" />
-        </application>
+            android:label="@string/activity_title_fixed_header"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
+        <activity
+            android:name="com.manuelpeinado.glassactionbardemo.ChangingContentActivity"
+            android:label="@string/activity_title_changing_content"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
+    </application>
 
 </manifest>
