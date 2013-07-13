@@ -16,8 +16,11 @@
 package com.manuelpeinado.glassactionbar;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.MeasureSpec;
@@ -26,6 +29,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.cyrilmottier.android.translucentactionbar.NotifyingScrollView;
@@ -35,6 +40,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     private int contentLayout;
     private FrameLayout frame;
     private View content;
+    private ListAdapter adapter;
     private ImageView blurredOverlay;
     private int actionBarHeight;
     private int width;
@@ -46,13 +52,30 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     private static final int DOWN_SAMPLING = 3;
     private static final String TAG = "GlassActionBarHelper";
     private boolean verbose = true;
+    private Drawable windowBackground;
 
     public GlassActionBarHelper contentLayout(int layout) {
         this.contentLayout = layout;
         return this;
     }
 
+    public GlassActionBarHelper contentLayout(int layout, ListAdapter adapter) {
+        this.contentLayout = layout;
+        this.adapter = adapter;
+        return this;
+    }
+
     public View createView(Context context) {
+        int[] attrs = { android.R.attr.windowBackground };
+        
+     // Need to get resource id of style pointed to from actionBarStyle
+        TypedValue outValue = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.windowBackground, outValue, true);
+        
+        TypedArray style = context.getTheme().obtainStyledAttributes(outValue.resourceId, attrs);
+        windowBackground = style.getDrawable(0);
+        style.recycle();
+            
         LayoutInflater inflater = LayoutInflater.from(context);
         frame = (FrameLayout) inflater.inflate(R.layout.gab__frame, null);
         content = inflater.inflate(contentLayout, (ViewGroup) frame, false);
@@ -107,7 +130,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         }
         long start = System.nanoTime();
 
-        scaled = Utils.drawViewToBitmap(content, width, height, DOWN_SAMPLING);
+        scaled = Utils.drawViewToBitmap(content, width, height, DOWN_SAMPLING, windowBackground);
 
         long delta = System.nanoTime() - start;
         if (verbose) Log.v(TAG, "computeBlurOverlay() - drawing layout to canvas took " + delta/1e6f + " ms");
