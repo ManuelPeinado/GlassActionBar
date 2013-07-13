@@ -17,7 +17,7 @@ package com.manuelpeinado.glassactionbar;
 
 
 public class GlassActionBar {
-    public static boolean verbose = true;
+    public static boolean verbose = false;
     
     public static final int DEFAULT_BLUR_RADIUS = 7;
     public static final int MIN_BLUR_RADIUS = 1;
