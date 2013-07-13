@@ -15,13 +15,11 @@ import android.view.View;
 
 public class Utils {
     public static Bitmap drawViewToBitmap(View view, int width, int height, int downSampling, Drawable drawable) {
-        Log.v("Utils", "drawViewToBitmap()" + "width=" + width + ", height=" + height);
         float scale = 1f / downSampling;
         int heightCopy = view.getHeight();
         view.layout(0, 0, width, height);
         Bitmap original = Bitmap.createBitmap((int)(width * scale), (int)(height * scale), Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(original);
-        // TODO do this with bitwise ops
         drawable.setBounds(new Rect(0, 0, width, height));
         drawable.draw(c);
         if (downSampling > 1) {
@@ -29,18 +27,17 @@ public class Utils {
         }
         view.draw(c);
         view.layout(0, 0, width, heightCopy);
-        saveToSdCard(original);
+        // saveToSdCard(original, "original.png");
         return original;
     }
 
-    private static void saveToSdCard(Bitmap bmp) {
-
+    public static void saveToSdCard(Bitmap bmp, String fileName) {
         try {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
 
             //you can create a new file name "test.jpg" in sdcard folder.
-            File f = new File(Environment.getExternalStorageDirectory() + File.separator + "test.png");
+            File f = new File(Environment.getExternalStorageDirectory() + File.separator + fileName);
             f.createNewFile();
             //write the bytes in file
             FileOutputStream fo = new FileOutputStream(f);

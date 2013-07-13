@@ -87,6 +87,9 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         if (content instanceof NotifyingScrollView) {
             scrollView = (NotifyingScrollView) content;
             scrollView.setOnScrollChangedListener(this);
+        } else if (content instanceof ListView) {
+            ListView listView = (ListView) content;
+            listView.setAdapter(adapter);
         }
 
         actionBarHeight = (int) context.getResources().getDimension(R.dimen.abs__action_bar_default_height);
@@ -134,12 +137,10 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
 
         long delta = System.nanoTime() - start;
         if (verbose) Log.v(TAG, "computeBlurOverlay() - drawing layout to canvas took " + delta/1e6f + " ms");
-        if (scrollView != null) {
-            if (verbose) Log.v(TAG, "computeBlurOverlay() - starting blur task");
-            startBlurTask();
-        } else {
-            if (verbose) Log.v(TAG, "computeBlurOverlay() - not starting blur task because scrollView is null");
-        }
+
+        if (verbose) Log.v(TAG, "computeBlurOverlay() - starting blur task");
+        startBlurTask();
+
         if (scrollView != null) {
             if (verbose) Log.v(TAG, "computeBlurOverlay() - restoring scroll from " + scrollView.getScrollY() + " to " + scrollPosition);
             scrollView.scrollTo(0, scrollPosition);
@@ -147,6 +148,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     }
 
     private void startBlurTask() {
+        if (verbose) Log.v(TAG, "startBlurTask()");
         if (blurTask != null) {
             if (verbose) Log.v(TAG, "startBlurTask() - task was already running, canceling it");
             blurTask.cancel();
@@ -203,6 +205,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         if (verbose) Log.v(TAG, "onBlurOperationFinished() - blur operation finished");
         blurTask = null;
         updateBlurOverlay(lastScrollPosition, true);
+        // Utils.saveToSdCard(scaled, "blurred.png");
     }
 
 }
