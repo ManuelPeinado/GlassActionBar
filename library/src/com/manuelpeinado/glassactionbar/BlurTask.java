@@ -14,15 +14,21 @@ public class BlurTask {
     private Bitmap blurred;
     private Listener listener;
     private Context context;
+    private int radius;
 
     public interface Listener {
         void onBlurOperationFinished();
     }
 
     public BlurTask(Context context, Listener listener, Bitmap source) {
+        this(context, listener, source, GlassActionBar.DEFAULT_BLUR_RADIUS);
+    }
+
+    public BlurTask(Context context, Listener listener, Bitmap source, int radius) {
         this.context = context;
         this.listener = listener;
         this.source = source;
+        this.radius = radius;
         canvas = new Canvas(source);
         startTask();
     }
@@ -52,9 +58,9 @@ public class BlurTask {
             return;
         }
         long start = System.nanoTime();
-        blurred = Blur.apply(context, source);
+        blurred = Blur.apply(context, source, radius);
         long delta = System.nanoTime() - start;
-        Log.v("BlurTask", "Blurring took " + delta/1e6f + " ms"); 
+        if (GlassActionBar.verbose) Log.v("BlurTask", "Blurring took " + delta/1e6f + " ms"); 
     }
 
     public void cancel() {

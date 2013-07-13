@@ -32,7 +32,8 @@ public class HomeActivity extends SherlockListActivity {
             new ActivityInfo(ScrollViewActivity.class, R.string.activity_title_scrollview),
             new ActivityInfo(FixedHeaderActivity.class, R.string.activity_title_fixed_header),
             new ActivityInfo(ChangingContentActivity.class, R.string.activity_title_changing_content),
-            new ActivityInfo(ListViewActivity.class, R.string.activity_title_listview));
+            new ActivityInfo(ListViewActivity.class, R.string.activity_title_listview),
+            new ActivityInfo(SettingsActivity.class, R.string.activity_title_settings));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

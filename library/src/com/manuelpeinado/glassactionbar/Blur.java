@@ -12,10 +12,9 @@ import android.renderscript.ScriptIntrinsicBlur;
 // Code borrowed from Nicolas Pomepuy
 // https://github.com/PomepuyN/BlurEffectForAndroidDesign
 public class Blur {
-    private static final int DEFAULT_RADIUS = 12;
 
     public static Bitmap apply(Context context, Bitmap sentBitmap) {
-        return apply(context, sentBitmap, DEFAULT_RADIUS);
+        return apply(context, sentBitmap, GlassActionBar.DEFAULT_BLUR_RADIUS);
     }
 
     @SuppressLint("NewApi")
@@ -28,7 +27,7 @@ public class Blur {
                     Allocation.USAGE_SCRIPT);
             final Allocation output = Allocation.createTyped(rs, input.getType());
             final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
-            script.setRadius(radius /* e.g. 3.f */);
+            script.setRadius(radius);
             script.setInput(input);
             script.forEach(output);
             output.copyTo(bitmap);

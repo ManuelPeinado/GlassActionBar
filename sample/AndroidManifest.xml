@@ -40,6 +40,10 @@
             android:name="com.manuelpeinado.glassactionbardemo.ListViewActivity"
             android:label="@string/activity_title_listview"
             android:theme="@style/AppTheme.TranslucentActionBar" />
+        <activity
+            android:name="com.manuelpeinado.glassactionbardemo.SettingsActivity"
+            android:label="@string/activity_title_settings"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
     </application>
 
 </manifest>

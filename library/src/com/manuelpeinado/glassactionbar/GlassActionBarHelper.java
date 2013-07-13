@@ -47,13 +47,14 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     private int width;
     private int height;
     private Bitmap scaled;
+    private int blurRadius = GlassActionBar.DEFAULT_BLUR_RADIUS;
     private BlurTask blurTask;
     private int lastScrollPosition = -1;
     private NotifyingScrollView scrollView;
     private ListView listView;
     private static final int DOWN_SAMPLING = 3;
     private static final String TAG = "GlassActionBarHelper";
-    private boolean verbose = true;
+    private boolean verbose = GlassActionBar.verbose;
     private Drawable windowBackground;
 
     public GlassActionBarHelper contentLayout(int layout) {
@@ -107,6 +108,21 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         scaled = null;
         computeBlurOverlay();
         updateBlurOverlay(lastScrollPosition, true);
+    }
+
+    public void setBlurRadius(int newValue) {
+        if (!GlassActionBar.isValidBlurRadius(newValue)) {
+            throw new IllegalArgumentException("Invalid blur radius");
+        }
+        if (blurRadius == newValue) {
+            return;
+        }
+        blurRadius = newValue;
+        invalidate();
+    }
+
+    public int getBlurRadius() {
+        return blurRadius;
     }
 
     @Override
@@ -164,7 +180,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
             if (verbose) Log.v(TAG, "startBlurTask() - task was already running, canceling it");
             blurTask.cancel();
         }
-        blurTask = new BlurTask(frame.getContext(), this, scaled);
+        blurTask = new BlurTask(frame.getContext(), this, scaled, blurRadius);
     }
 
     private void updateBlurOverlay(int top, boolean force) {
