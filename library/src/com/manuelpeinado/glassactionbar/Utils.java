@@ -27,7 +27,7 @@ public class Utils {
         }
         view.draw(c);
         view.layout(0, 0, width, heightCopy);
-        // saveToSdCard(original, "original.png");
+        saveToSdCard(original, "original.png");
         return original;
     }
 

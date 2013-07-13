@@ -35,8 +35,9 @@ import android.widget.ScrollView;
 
 import com.cyrilmottier.android.translucentactionbar.NotifyingScrollView;
 import com.cyrilmottier.android.translucentactionbar.NotifyingScrollView.OnScrollChangedListener;
+import com.manuelpeinado.glassactionbar.ListViewScrollObserver.OnListViewScrollListener;
 
-public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollChangedListener, BlurTask.Listener {
+public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollChangedListener, BlurTask.Listener, OnListViewScrollListener {
     private int contentLayout;
     private FrameLayout frame;
     private View content;
@@ -49,6 +50,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     private BlurTask blurTask;
     private int lastScrollPosition = -1;
     private NotifyingScrollView scrollView;
+    private ListView listView;
     private static final int DOWN_SAMPLING = 3;
     private static final String TAG = "GlassActionBarHelper";
     private boolean verbose = true;
@@ -85,11 +87,15 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         blurredOverlay = (ImageView) frame.findViewById(R.id.blurredOverlay);
 
         if (content instanceof NotifyingScrollView) {
+            if (verbose) Log.v(TAG, "ScrollView content!");
             scrollView = (NotifyingScrollView) content;
             scrollView.setOnScrollChangedListener(this);
         } else if (content instanceof ListView) {
-            ListView listView = (ListView) content;
+            if (verbose) Log.v(TAG, "ListView content!");
+            listView = (ListView) content;
             listView.setAdapter(adapter);
+            ListViewScrollObserver observer = new ListViewScrollObserver(listView);
+            observer.setOnScrollUpAndDownListener(this);
         }
 
         actionBarHeight = (int) context.getResources().getDimension(R.dimen.abs__action_bar_default_height);
@@ -111,7 +117,12 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
             return;
         }
         int widthMeasureSpec = MeasureSpec.makeMeasureSpec(frame.getWidth(), MeasureSpec.AT_MOST);
-        int heightMeasureSpec = MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT, MeasureSpec.EXACTLY);
+        int heightMeasureSpec;
+        if (listView != null) {
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(frame.getHeight(), MeasureSpec.EXACTLY);
+        } else {
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(LayoutParams.WRAP_CONTENT, MeasureSpec.EXACTLY);
+        }
         content.measure(widthMeasureSpec, heightMeasureSpec);
         width = frame.getWidth();
         height = content.getMeasuredHeight();
@@ -196,7 +207,21 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
 
     @Override
     public void onScrollChanged(ScrollView who, int l, int t, int oldl, int oldt) {
-        if (verbose) Log.v(TAG, "onScrollChanged() - new scroll position is " + t);
+        // ScrollView scroll
+        onNewScroll(t);
+    }
+
+    @Override
+    public void onScrollUpDownChanged(int delta, int scrollPosition, boolean exact) {
+        // ListView scroll
+        if (verbose) Log.v(TAG, "onScrollUpDownChanged() " + exact);
+        if (exact) {
+            onNewScroll(-scrollPosition);
+        }
+    }
+
+    private void onNewScroll(int t) {
+        if (verbose) Log.v(TAG, "onNewScroll() - new scroll position is " + t);
         updateBlurOverlay(t, false);
     }
 
@@ -205,7 +230,11 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         if (verbose) Log.v(TAG, "onBlurOperationFinished() - blur operation finished");
         blurTask = null;
         updateBlurOverlay(lastScrollPosition, true);
-        // Utils.saveToSdCard(scaled, "blurred.png");
+        Utils.saveToSdCard(scaled, "blurred.png");
+    }
+
+    @Override
+    public void onScrollIdle() {
     }
 
 }
