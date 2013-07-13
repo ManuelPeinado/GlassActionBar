@@ -52,7 +52,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     private int lastScrollPosition = -1;
     private NotifyingScrollView scrollView;
     private ListView listView;
-    private static final int DOWN_SAMPLING = 3;
+    private int downSampling = GlassActionBar.DEFAULT_DOWNSAMPLING;
     private static final String TAG = "GlassActionBarHelper";
     private boolean verbose = GlassActionBar.verbose;
     private Drawable windowBackground;
@@ -125,6 +125,21 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         return blurRadius;
     }
 
+    public void setDownsampling(int newValue) {
+        if (!GlassActionBar.isValidDownsampling(newValue)) {
+            throw new IllegalArgumentException("Invalid downsampling");
+        }
+        if (downSampling == newValue) {
+            return;
+        }
+        downSampling = newValue;
+        invalidate();
+    }
+
+    public int getDownsampling() {
+        return downSampling;
+    }
+
     @Override
     public void onGlobalLayout() {
         if (verbose) Log.v(TAG, "onGlobalLayout()");
@@ -160,7 +175,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         }
         long start = System.nanoTime();
 
-        scaled = Utils.drawViewToBitmap(content, width, height, DOWN_SAMPLING, windowBackground);
+        scaled = Utils.drawViewToBitmap(scaled, content, width, height, downSampling, windowBackground);
 
         long delta = System.nanoTime() - start;
         if (verbose) Log.v(TAG, "computeBlurOverlay() - drawing layout to canvas took " + delta/1e6f + " ms");
@@ -200,8 +215,8 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
             return;
         }
         lastScrollPosition = top;
-        Bitmap actionBarSection = Bitmap.createBitmap(scaled, 0, top / DOWN_SAMPLING, width / DOWN_SAMPLING,
-                actionBarHeight / DOWN_SAMPLING);
+        Bitmap actionBarSection = Bitmap.createBitmap(scaled, 0, top / downSampling, width / downSampling,
+                actionBarHeight / downSampling);
         // Blur here until background finished (will make smooth jerky during the first second or so).
         Bitmap blurredBitmap;
         if (isBlurTaskFinished()) {
@@ -246,7 +261,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         if (verbose) Log.v(TAG, "onBlurOperationFinished() - blur operation finished");
         blurTask = null;
         updateBlurOverlay(lastScrollPosition, true);
-        Utils.saveToSdCard(scaled, "blurred.png");
+        // Utils.saveToSdCard(scaled, "blurred.png");
     }
 
     @Override

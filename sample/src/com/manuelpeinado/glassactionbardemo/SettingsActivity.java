@@ -30,6 +30,8 @@ public class SettingsActivity extends SherlockActivity implements OnSeekBarChang
     private GlassActionBarHelper helper;
     private SeekBar radiusSeekBar;
     private TextView radiusTextView;
+    private SeekBar downsamplingSeekBar;
+    private TextView downsamplingTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +45,42 @@ public class SettingsActivity extends SherlockActivity implements OnSeekBarChang
         radiusTextView = (TextView) findViewById(R.id.radiusTextView);
         initializeRadiusSeekBar();
         updateRadiusTextView();
+
+        downsamplingSeekBar = (SeekBar) findViewById(R.id.downsamplingSeekBar);
+        downsamplingSeekBar.setOnSeekBarChangeListener(this);
+        downsamplingTextView = (TextView) findViewById(R.id.downsamplingTextView);
+        initializeDownsamplingSeekBar();
+        updateDownsamplingTextView();
     }
 
     private void initializeRadiusSeekBar() {
+        setSeekBarValue(radiusSeekBar, helper.getBlurRadius(), GlassActionBar.MIN_BLUR_RADIUS, GlassActionBar.MAX_BLUR_RADIUS);
+    }
+
+    private void updateRadiusTextView() {
         int radius = helper.getBlurRadius();
-        setSeekBarValue(radiusSeekBar, radius, GlassActionBar.MIN_BLUR_RADIUS, GlassActionBar.MAX_BLUR_RADIUS);
+        radiusTextView.setText("Blur radius=" + radius);
+    }
+
+    private void initializeDownsamplingSeekBar() {
+        setSeekBarValue(downsamplingSeekBar, helper.getDownsampling(), GlassActionBar.MIN_DOWNSAMPLING, GlassActionBar.MAX_DOWNSAMPLING);
+    }
+
+    private void updateDownsamplingTextView() {
+        downsamplingTextView.setText("Downsampling=" + helper.getDownsampling());
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        if (seekBar == radiusSeekBar) {
+            float value = transformSeekBarValue(seekBar, GlassActionBar.MIN_BLUR_RADIUS, GlassActionBar.MAX_BLUR_RADIUS);
+            helper.setBlurRadius(Math.round(value));
+            updateRadiusTextView();
+        } else {
+            float value = transformSeekBarValue(seekBar, GlassActionBar.MIN_DOWNSAMPLING, GlassActionBar.MAX_DOWNSAMPLING);
+            helper.setDownsampling(Math.round(value));
+            updateDownsamplingTextView();
+        }
     }
 
     private static void setSeekBarValue(SeekBar seekBar, float value, float min, float max) {
@@ -56,22 +89,10 @@ public class SettingsActivity extends SherlockActivity implements OnSeekBarChang
         seekBar.setProgress(Math.round(value * seekBar.getMax()));
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        float value = transformSeekBarValue(seekBar, GlassActionBar.MIN_BLUR_RADIUS, GlassActionBar.MAX_BLUR_RADIUS);
-        helper.setBlurRadius(Math.round(value));
-        updateRadiusTextView();
-    }
-
     private static float transformSeekBarValue(SeekBar seekBar, int min, int max) {
         float value = seekBar.getProgress() / (float) seekBar.getMax();
         float span = max - min;
         return min + value * span;
-    }
-
-    private void updateRadiusTextView() {
-        int radius = helper.getBlurRadius();
-        radiusTextView.setText("Blur radius=" + radius);
     }
 
     @Override

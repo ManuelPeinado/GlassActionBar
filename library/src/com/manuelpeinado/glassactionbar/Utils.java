@@ -13,12 +13,16 @@ import android.os.Environment;
 import android.view.View;
 
 public class Utils {
-    public static Bitmap drawViewToBitmap(View view, int width, int height, int downSampling, Drawable drawable) {
+    public static Bitmap drawViewToBitmap(Bitmap dest, View view, int width, int height, int downSampling, Drawable drawable) {
         float scale = 1f / downSampling;
         int heightCopy = view.getHeight();
         view.layout(0, 0, width, height);
-        Bitmap original = Bitmap.createBitmap((int)(width * scale), (int)(height * scale), Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(original);
+        int bmpWidth = (int)(width * scale);
+        int bmpHeight = (int)(height * scale);
+        if (dest == null || dest.getWidth() != bmpWidth || dest.getHeight() != bmpHeight) {
+            dest = Bitmap.createBitmap(bmpWidth, bmpHeight, Bitmap.Config.ARGB_8888);
+        }
+        Canvas c = new Canvas(dest);
         drawable.setBounds(new Rect(0, 0, width, height));
         drawable.draw(c);
         if (downSampling > 1) {
@@ -26,8 +30,8 @@ public class Utils {
         }
         view.draw(c);
         view.layout(0, 0, width, heightCopy);
-        saveToSdCard(original, "original.png");
-        return original;
+        // saveToSdCard(original, "original.png");
+        return dest;
     }
 
     public static void saveToSdCard(Bitmap bmp, String fileName) {
