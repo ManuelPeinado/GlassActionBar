@@ -18,28 +18,26 @@ Try out the sample application:
 
 Or browse the [source code of the sample application][3] for a complete example of use.
 
-Please keep in mind that the code of the library is not fully optimized at the moment, and won't probably work smoothly in old devices. Future versions of the library will hopefully fix this.
-
-
 Including in your project
 -------------------------
 
-Just add the library to your application as a library project. And don't forget that your project must use ActionBarSherlock!
-
-Maven support is coming soon.
+* **Eclipse ADT users**: add the library to your workspace as a library project, using the "New > Project > Android project from existing code" command. In the new project's preferences, mark it as a library project and add a reference to ActionBarSherlock, which should be in your workspace. Then reference the new library project from your application project.
+* **Maven users**: I'm not uploading the library to maven central because Google hasn't made the Android 4.2 artifacts available there (don't ask me why). So you'll have to install the library to your local repo as an apklib using 'mvn install:install-file'. Oh, and you probably know this already, but to be able to compile aginst Android 4.2 you'll have to use [this][4]. Fun, I know.
+* **Gradle/Android Studio users**: build the project (gradle build files are provided) and add the generated aar file to your application. I'm not a gradle expert and I have never used Android Studio, so easier options might be available.
 
 Usage
 -----
 
-Using the library is really simple, just look at the source code of the [provided sample][4].
+Using the library is really simple, just look at the source code of the [provided samples][5].
+
 
 Acknowledgements
 --------------------
 
 * Thanks to [Nicolas Pometuy][1] for sharing the techniques that make this library possible.
-* The gaussian blur effect is based on code by [Mario Klingemann][5] which was ported to Android by [Yahel Bouaziz][6].
-* NotifyingScrollView class by [Cyril Mottier][7].
-* Cat icon by [Davic Vignoni][8].
+* The gaussian blur effect is based on code by [Mario Klingemann][6] which was ported to Android by [Yahel Bouaziz][7].
+* NotifyingScrollView class by [Cyril Mottier][8].
+* Cat icon by [Davic Vignoni][9].
 
 Who's using it
 --------------
@@ -88,9 +86,10 @@ License
  [1]: http://nicolaspomepuy.fr/?p=18
  [2]: https://raw.github.com/ManuelPeinado/GlassActionBar/master/art/readme_pic.png
  [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample
- [4]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample/src/com/manuelpeinado/glassactionbardemo/MainActivity.java
- [5]: http://www.quasimondo.com/
- [6]: https://plus.google.com/107352914145283602089
- [7]: http://www.cyrilmottier.com
- [8]: http://www.icon-king.com/
+ [4]: https://github.com/mosabua/maven-android-sdk-deployer
+ [5]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample/src/com/manuelpeinado/glassactionbardemo/
+ [6]: http://www.quasimondo.com/
+ [7]: https://plus.google.com/107352914145283602089
+ [8]: http://www.cyrilmottier.com
+ [9]: http://www.icon-king.com/
 
