@@ -1,5 +1,7 @@
 package com.manuelpeinado.glassactionbardemo;
 
+import java.util.Arrays;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -9,10 +11,14 @@ import android.widget.ImageView;
 
 
 public class ImagesAdapter extends BaseAdapter {
-    private Drawable drawable;
+    private Drawable[] drawables;
 
     public ImagesAdapter(Context context) {
-        drawable = context.getResources().getDrawable(R.drawable.new_york_city_1);
+        drawables = new Drawable[] {
+                context.getResources().getDrawable(R.drawable.new_york_city_1),
+                context.getResources().getDrawable(R.drawable.new_york_city_2),
+                context.getResources().getDrawable(R.drawable.new_york_city_3)
+        };
     }
     
 
@@ -23,7 +29,7 @@ public class ImagesAdapter extends BaseAdapter {
 
     @Override
     public Drawable getItem(int position) {
-        return drawable;
+        return drawables[position % drawables.length];
     }
 
     @Override
