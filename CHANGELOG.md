@@ -10,6 +10,7 @@ Version 0.2.1 *(2013-07-?)*
  * Fixed bug which prevented transparent content from being blurred properly.
  * Many performance optimizations.
  * Added possibility of changing the gaussian blur params ("radius" and "downsampling").
+ * Added support for maven and gradle builds.
 
 Version 0.1.1 *(2013-06-23)*
 ----------------------------
