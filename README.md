@@ -85,7 +85,7 @@ License
 
  [1]: http://nicolaspomepuy.fr/?p=18
  [2]: https://raw.github.com/ManuelPeinado/GlassActionBar/master/art/readme_pic.png
- [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample
+ [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/glassactionbar-sample
  [4]: https://github.com/mosabua/maven-android-sdk-deployer
  [5]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/glassactionbar-sample/src/com/manuelpeinado/glassactionbardemo
  [6]: http://www.quasimondo.com/
