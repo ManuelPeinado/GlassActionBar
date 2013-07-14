@@ -1,0 +1,3 @@
+[submodule "thirdParty/actionbarsherlock"]
+	path = thirdParty/actionbarsherlock
+	url = git://github.com/JakeWharton/ActionBarSherlock.git

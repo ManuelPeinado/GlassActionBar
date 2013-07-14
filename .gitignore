@@ -18,11 +18,18 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+**project.properties
+
 
 #Maven
 target
 release.properties
 pom.xml.*
+
+#Gradle
+.gradle/
+glassactionbar/build/
+glassactionbar-sample/build
 
 # Folder containing all the Google Play APKs
 apks
