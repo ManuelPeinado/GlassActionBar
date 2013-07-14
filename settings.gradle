@@ -1,0 +1,5 @@
+include ':glassactionbar'
+include ':glassactionbar-sample'
+
+include 'actionbarsherlock'
+project(':actionbarsherlock').projectDir = new File('thirdParty/actionbarsherlock/actionbarsherlock')
