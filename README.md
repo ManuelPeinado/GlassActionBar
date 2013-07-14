@@ -87,7 +87,7 @@ License
  [2]: https://raw.github.com/ManuelPeinado/GlassActionBar/master/art/readme_pic.png
  [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample
  [4]: https://github.com/mosabua/maven-android-sdk-deployer
- [5]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample/src/com/manuelpeinado/glassactionbardemo/
+ [5]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/glassactionbar-sample/src/com/manuelpeinado/glassactionbardemo
  [6]: http://www.quasimondo.com/
  [7]: https://plus.google.com/107352914145283602089
  [8]: http://www.cyrilmottier.com
