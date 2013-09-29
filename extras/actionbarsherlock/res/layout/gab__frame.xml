@@ -5,7 +5,7 @@
     <ImageView
         android:id="@+id/blurredOverlay"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
         android:layout_gravity="top"
         android:scaleType="centerCrop" />
 

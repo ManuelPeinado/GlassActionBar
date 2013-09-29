@@ -99,8 +99,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
             observer.setOnScrollUpAndDownListener(this);
         }
 
-        context.getTheme().resolveAttribute(android.R.attr.actionBarSize, outValue, true);
-        actionBarHeight = context.getResources().getDimensionPixelSize(outValue.resourceId);
+        actionBarHeight = getActionBarHeight(context);
         return frame;
     }
 
@@ -139,6 +138,12 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
 
     public int getDownsampling() {
         return downSampling;
+    }
+
+    protected int getActionBarHeight(Context context) {
+        TypedValue outValue = new TypedValue();
+        context.getTheme().resolveAttribute(android.R.attr.actionBarSize, outValue, true);
+        return context.getResources().getDimensionPixelSize(outValue.resourceId);
     }
 
     @Override
