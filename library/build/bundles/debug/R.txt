@@ -1,2 +1,0 @@
-int id blurredOverlay 0x7f030000
-int layout gab__frame 0x7f020000
