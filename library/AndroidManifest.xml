@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.manuelpeinado.glassactionbar"
-    android:versionCode="4"
-    android:versionName="0.3.0" >
+    package="com.manuelpeinado.glassactionbar">
 
-    <uses-sdk android:targetSdkVersion="18"
-              android:minSdkVersion="14"/>
+    <uses-sdk android:targetSdkVersion="18" />
     <application />
 
 </manifest>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merger>
 
-    <dataSet config="GlassActionBarLibraryUnspecified.aar" >
-        <source path="/Users/manuel/GlassActionBar/sample/build/exploded-bundles/GlassActionBarLibraryUnspecified.aar/res" >
+    <dataSet config="ComManuelpeinadoGlassactionbarLibrary030SNAPSHOT.aar" >
+        <source path="/Users/manuel/GlassActionBar/sample/build/exploded-bundles/ComManuelpeinadoGlassactionbarLibrary030SNAPSHOT.aar/res" >
             <file
                 name="gab__frame"
-                path="/Users/manuel/GlassActionBar/sample/build/exploded-bundles/GlassActionBarLibraryUnspecified.aar/res/layout/gab__frame.xml"
+                path="/Users/manuel/GlassActionBar/sample/build/exploded-bundles/ComManuelpeinadoGlassactionbarLibrary030SNAPSHOT.aar/res/layout/gab__frame.xml"
                 qualifiers=""
                 type="layout" />
         </source>
@@ -95,9 +95,9 @@
             <file
                 path="/Users/manuel/GlassActionBar/sample/res/values/strings.xml"
                 qualifiers="" >
-                <string name="action_settings" >Settings
-                </string>
                 <string name="activity_title_changing_content" >Changing content sample
+                </string>
+                <string name="action_settings" >Settings
                 </string>
                 <string name="loren_ipsum" >Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
                 </string>

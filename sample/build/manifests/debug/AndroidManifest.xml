@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="4" android:versionName="0.3.0" package="com.manuelpeinado.glassactionbardemo">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="30" android:versionName="0.3.0-SNAPSHOT" package="com.manuelpeinado.glassactionbardemo">
 
     <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="18"/>
 

@@ -32,8 +32,8 @@ pom.xml.*
 
 # Gradle
 .gradle/
-glassactionbar/build/
-glassactionbar-sample/build
+library/build/
+sample/build
 
 # Folder containing all the Google Play APKs
 apks
