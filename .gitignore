@@ -21,12 +21,16 @@ local.properties
 **project.properties
 
 
-#Maven
+# Maven
 target
 release.properties
 pom.xml.*
 
-#Gradle
+# IntelliJ / Android Studio
+*.iml
+.idea/
+
+# Gradle
 .gradle/
 glassactionbar/build/
 glassactionbar-sample/build

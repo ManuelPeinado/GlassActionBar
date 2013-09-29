@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/manuel/GlassActionBar/library/res" >
+            <file
+                name="gab__frame"
+                path="/Users/manuel/GlassActionBar/library/res/layout/gab__frame.xml"
+                qualifiers=""
+                type="layout" />
+        </source>
+        <source path="/Users/manuel/GlassActionBar/library/build/res/rs/release" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="/Users/manuel/GlassActionBar/library/src/release/res" />
+    </dataSet>
+
+</merger>

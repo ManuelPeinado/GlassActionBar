@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.manuelpeinado.glassactionbardemo"
+    android:versionCode="4"
+    android:versionName="0.3.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="18" />
+
+    <!--  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.manuelpeinado.glassactionbardemo.HomeActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.manuelpeinado.glassactionbardemo.ScrollViewActivity"
+            android:label="@string/activity_title_scrollview"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
+        <activity
+            android:name="com.manuelpeinado.glassactionbardemo.FixedHeaderActivity"
+            android:label="@string/activity_title_fixed_header"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
+        <activity
+            android:name="com.manuelpeinado.glassactionbardemo.ChangingContentActivity"
+            android:label="@string/activity_title_changing_content"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
+        <activity
+            android:name="com.manuelpeinado.glassactionbardemo.ListViewActivity"
+            android:label="@string/activity_title_listview"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
+        <activity
+            android:name="com.manuelpeinado.glassactionbardemo.SettingsActivity"
+            android:label="@string/activity_title_settings"
+            android:theme="@style/AppTheme.TranslucentActionBar" />
+    </application>
+
+</manifest>

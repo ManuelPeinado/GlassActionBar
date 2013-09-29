@@ -1,0 +1,12 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/blurredOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_gravity="top"
+        android:scaleType="centerCrop" />
+
+</FrameLayout><!-- From: file:/Users/manuel/GlassActionBar/library/res/layout/gab__frame.xml -->

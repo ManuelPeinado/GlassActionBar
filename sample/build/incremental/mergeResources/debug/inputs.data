@@ -1,0 +1,23 @@
+# incremental data. DO NOT EDIT.
+# format is <lastModified> <length> <SHA-1> <path>
+# Encoding is UTF-8
+1380470158000 306 e87cde576983113a3fd3d8a5ca3ee9ac0db77a07 /Users/manuel/GlassActionBar/sample/res/values/themes.xml
+1373798629000 2549 a44a2a8ae4803397a82d2fbb7de68b595373a91b /Users/manuel/GlassActionBar/sample/res/layout/activity_scrollview.xml
+1373798625000 152 77b7835f92f53208ee105417e17ce2c824ebaaa3 /Users/manuel/GlassActionBar/sample/res/layout/activity_listview.xml
+1373798629000 13125 d83629611fba3e518cc70467ad2cc8795accf152 /Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/ic_launcher.png
+1373798629000 186781 b66eb1a4fb1ec48979c959f9ca9fa37789b8bbdd /Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/new_york_city_1.jpg
+1373798629000 225953 9dfe351073663309c9948059a0c55b1c1bbc0742 /Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/new_york_city_3.jpg
+1373798629000 138144 9d5a6065daec156e5c6be58c2a558c55637b0d21 /Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/new_york_city_2.jpg
+1373798625000 2600 6976b4ed2da59516092a9be81c7a9f3c61da2c4e /Users/manuel/GlassActionBar/sample/res/layout/activity_fixed_header.xml
+1380470171000 185 017618e60750e127d17c642d5540548da46cfe93 /Users/manuel/GlassActionBar/sample/res/values/styles.xml
+1373798629000 8034 ffe108f281c9d254e1f6961ad76053c78509686e /Users/manuel/GlassActionBar/sample/res/drawable-hdpi/ic_launcher.png
+1373798629000 217 6a16f1b13e4c12f54e466a7c50bb7761198e206a /Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/ab_transparent.9.png
+1373798625000 2532 263bb0772bafb53604b34769cd9b967e88ce4097 /Users/manuel/GlassActionBar/sample/res/layout/activity_changing_content.xml
+1373798629000 253 ec4baedf4e33e5dd41ea7e021286cd2089775c4a /Users/manuel/GlassActionBar/sample/res/menu/main.xml
+1373798629000 944 170c1c2748e2ff6e0bd8121f6a850e6f53731aae /Users/manuel/GlassActionBar/sample/res/values/strings.xml
+1373798625000 243 8ad338759de503bc00699ae4d72ccfc8b8631c8e /Users/manuel/GlassActionBar/sample/res/layout/activity_home.xml
+1380469926000 492 012ee5ddbb874c19ed790bf09aa302c256358f72 /Users/manuel/GlassActionBar/sample/build/exploded-bundles/GlassActionBarLibraryUnspecified.aar/res/layout/gab__frame.xml
+1373798625000 3288 ce315bc5a850cbaeab28e0eb84759211dda3f917 /Users/manuel/GlassActionBar/sample/res/layout/activity_settings.xml
+1373798629000 26611 405b3d654de9017ed9d29a5f008e56b95ba2323b /Users/manuel/GlassActionBar/sample/res/drawable-xxhdpi/ic_launcher.png
+1373798629000 3914 6b3c9ec4019d05d400206487c96b4539246b3f4b /Users/manuel/GlassActionBar/sample/res/drawable-mdpi/ic_launcher.png
+1373798629000 470013 385749ce8a26322512755b393b06e4fa0113ac78 /Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/glass.png

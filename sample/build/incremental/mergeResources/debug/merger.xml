@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="GlassActionBarLibraryUnspecified.aar" >
+        <source path="/Users/manuel/GlassActionBar/sample/build/exploded-bundles/GlassActionBarLibraryUnspecified.aar/res" >
+            <file
+                name="gab__frame"
+                path="/Users/manuel/GlassActionBar/sample/build/exploded-bundles/GlassActionBarLibraryUnspecified.aar/res/layout/gab__frame.xml"
+                qualifiers=""
+                type="layout" />
+        </source>
+    </dataSet>
+    <dataSet config="main" >
+        <source path="/Users/manuel/GlassActionBar/sample/res" >
+            <file
+                name="ic_launcher"
+                path="/Users/manuel/GlassActionBar/sample/res/drawable-hdpi/ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/manuel/GlassActionBar/sample/res/drawable-mdpi/ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ab_transparent"
+                path="/Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/ab_transparent.9.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="glass"
+                path="/Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/glass.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="new_york_city_1"
+                path="/Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/new_york_city_1.jpg"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="new_york_city_2"
+                path="/Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/new_york_city_2.jpg"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="new_york_city_3"
+                path="/Users/manuel/GlassActionBar/sample/res/drawable-xhdpi/new_york_city_3.jpg"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="/Users/manuel/GlassActionBar/sample/res/drawable-xxhdpi/ic_launcher.png"
+                qualifiers="xxhdpi"
+                type="drawable" />
+            <file
+                name="activity_changing_content"
+                path="/Users/manuel/GlassActionBar/sample/res/layout/activity_changing_content.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_fixed_header"
+                path="/Users/manuel/GlassActionBar/sample/res/layout/activity_fixed_header.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_home"
+                path="/Users/manuel/GlassActionBar/sample/res/layout/activity_home.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_listview"
+                path="/Users/manuel/GlassActionBar/sample/res/layout/activity_listview.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_scrollview"
+                path="/Users/manuel/GlassActionBar/sample/res/layout/activity_scrollview.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_settings"
+                path="/Users/manuel/GlassActionBar/sample/res/layout/activity_settings.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="main"
+                path="/Users/manuel/GlassActionBar/sample/res/menu/main.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                path="/Users/manuel/GlassActionBar/sample/res/values/strings.xml"
+                qualifiers="" >
+                <string name="action_settings" >Settings
+                </string>
+                <string name="activity_title_changing_content" >Changing content sample
+                </string>
+                <string name="loren_ipsum" >Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
+                </string>
+                <string name="activity_title_settings" >Settings sample
+                </string>
+                <string name="activity_title_scrollview" >ScrollView sample
+                </string>
+                <string name="app_name" >GlassActionBarDemo
+                </string>
+                <string name="activity_title_listview" >ListView sample
+                </string>
+                <string name="activity_title_fixed_header" >Fixed header sample
+                </string>
+            </file>
+            <file
+                path="/Users/manuel/GlassActionBar/sample/res/values/styles.xml"
+                qualifiers="" >
+
+                <style
+                    name="TranslucentActionBar"
+                    parent="android:Widget.ActionBar" >
+                    <item name="android:background">
+@drawable/ab_transparent
+                    </item>
+                </style>
+            </file>
+            <file
+                path="/Users/manuel/GlassActionBar/sample/res/values/themes.xml"
+                qualifiers="" >
+
+                <style name="AppTheme.TranslucentActionBar" >
+                    <item name="android:windowActionBarOverlay">
+true
+                    </item>
+                    <item name="android:actionBarStyle">
+@style/TranslucentActionBar
+                    </item>
+                </style>
+
+                <style
+                    name="AppTheme"
+                    parent="android:Theme.Holo.Light" >
+                </style>
+            </file>
+        </source>
+        <source path="/Users/manuel/GlassActionBar/sample/build/res/rs/debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/manuel/GlassActionBar/sample/src/debug/res" />
+    </dataSet>
+
+</merger>
