@@ -1,2 +1,3 @@
 include ':library'
-include ':sample'
+include 'extras/actionbarsherlock'
+include ':samples/stock'

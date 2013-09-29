@@ -32,8 +32,7 @@ pom.xml.*
 
 # Gradle
 .gradle/
-library/build/
-sample/build
+build
 
 # Folder containing all the Google Play APKs
 apks
