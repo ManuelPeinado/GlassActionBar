@@ -15,18 +15,18 @@
  */
 package com.manuelpeinado.glassactionbardemo;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
 import com.manuelpeinado.glassactionbar.GlassActionBar;
 import com.manuelpeinado.glassactionbar.GlassActionBarHelper;
-import com.manuelpeinado.glassactionbar.samples.stock.R;
+import com.manuelpeinado.glassactionbar.samples.actionbarsherlock.R;
 
-public class SettingsActivity extends Activity implements OnSeekBarChangeListener {
+public class SettingsActivity extends SherlockActivity implements OnSeekBarChangeListener {
 
     private GlassActionBarHelper helper;
     private SeekBar radiusSeekBar;
@@ -98,7 +98,7 @@ public class SettingsActivity extends Activity implements OnSeekBarChangeListene
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getSupportMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 

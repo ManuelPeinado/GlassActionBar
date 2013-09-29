@@ -15,16 +15,16 @@
  */
 package com.manuelpeinado.glassactionbardemo;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
 import com.manuelpeinado.glassactionbar.GlassActionBarHelper;
-import com.manuelpeinado.glassactionbar.samples.stock.R;
+import com.manuelpeinado.glassactionbar.samples.actionbarsherlock.R;
 
-public class ChangingContentActivity extends Activity {
+public class ChangingContentActivity extends SherlockActivity {
 
     private GlassActionBarHelper helper;
     private ImageView imageView;
@@ -51,7 +51,7 @@ public class ChangingContentActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getSupportMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 }

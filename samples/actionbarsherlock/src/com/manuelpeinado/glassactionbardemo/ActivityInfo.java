@@ -16,27 +16,13 @@
 package com.manuelpeinado.glassactionbardemo;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
 
-import com.manuelpeinado.glassactionbar.GlassActionBarHelper;
-import com.manuelpeinado.glassactionbar.samples.stock.R;
+public class ActivityInfo {
+    public Class<? extends Activity> activityClass;
+    public int titleResourceId;
 
-public class FixedHeaderActivity extends Activity {
-
-    private GlassActionBarHelper helper;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        helper = new GlassActionBarHelper().contentLayout(R.layout.activity_fixed_header);
-        setContentView(helper.createView(this));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    public ActivityInfo(Class<? extends Activity> activityClass, int titleResourceId) {
+        this.activityClass = activityClass;
+        this.titleResourceId = titleResourceId;
     }
 }

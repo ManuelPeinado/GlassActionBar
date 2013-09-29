@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.manuelpeinado.glassactionbar.samples.stock" >
+    package="com.manuelpeinado.glassactionbar.samples.actionbarsherlock" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="7"
         android:targetSdkVersion="18" />
 
     <!--  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->

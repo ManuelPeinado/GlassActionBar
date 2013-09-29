@@ -25,7 +25,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import com.manuelpeinado.glassactionbar.samples.stock.R;
+import com.manuelpeinado.glassactionbar.samples.actionbarsherlock.R;
 
 public class HomeActivity extends ListActivity {
     private List<ActivityInfo> activitiesInfo = Arrays.asList(

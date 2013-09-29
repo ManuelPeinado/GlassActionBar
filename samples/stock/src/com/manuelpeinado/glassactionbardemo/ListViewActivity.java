@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.widget.ListAdapter;
 
 import com.manuelpeinado.glassactionbar.GlassActionBarHelper;
+import com.manuelpeinado.glassactionbar.samples.stock.R;
 
 public class ListViewActivity extends Activity {
 

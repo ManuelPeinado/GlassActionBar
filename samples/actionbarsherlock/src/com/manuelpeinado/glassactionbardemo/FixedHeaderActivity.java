@@ -15,43 +15,28 @@
  */
 package com.manuelpeinado.glassactionbardemo;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
-import android.widget.ImageView;
 
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
 import com.manuelpeinado.glassactionbar.GlassActionBarHelper;
-import com.manuelpeinado.glassactionbar.samples.stock.R;
+import com.manuelpeinado.glassactionbar.samples.actionbarsherlock.R;
 
-public class ChangingContentActivity extends Activity {
+public class FixedHeaderActivity extends SherlockActivity {
 
     private GlassActionBarHelper helper;
-    private ImageView imageView;
-    private static final int[] IMAGES = {
-        R.drawable.new_york_city_1,
-        R.drawable.new_york_city_2,
-        R.drawable.new_york_city_3
-    };
-    private int currentImage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        helper = new GlassActionBarHelper().contentLayout(R.layout.activity_changing_content);
+        helper = new GlassActionBarHelper().contentLayout(R.layout.activity_fixed_header);
         setContentView(helper.createView(this));
-        imageView = (ImageView) findViewById(R.id.imageView);
-    }
-    
-    public void changeImage(View view) {
-        imageView.setImageResource(IMAGES[++currentImage % IMAGES.length]);
-        helper.invalidate();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getSupportMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 }

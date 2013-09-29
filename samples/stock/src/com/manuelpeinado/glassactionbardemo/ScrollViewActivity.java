@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import com.manuelpeinado.glassactionbar.GlassActionBarHelper;
+import com.manuelpeinado.glassactionbar.samples.stock.R;
 
 public class ScrollViewActivity extends Activity {
 

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import com.manuelpeinado.glassactionbar.samples.stock.R;
+import com.manuelpeinado.glassactionbar.samples.actionbarsherlock.R;
 
 
 public class ImagesAdapter extends BaseAdapter {
