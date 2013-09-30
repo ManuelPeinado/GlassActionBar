@@ -13,25 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.manuelpeinado.glassactionbardemo;
+package com.manuelpeinado.glassaction.samples.actionbarsherlock;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.manuelpeinado.glassactionbar.GlassActionBarHelper;
 import com.manuelpeinado.glassactionbar.samples.actionbarsherlock.R;
 
-public class FixedHeaderActivity extends SherlockActivity {
+public class ChangingContentActivity extends SherlockActivity {
 
     private GlassActionBarHelper helper;
+    private ImageView imageView;
+    private static final int[] IMAGES = {
+        R.drawable.new_york_city_1,
+        R.drawable.new_york_city_2,
+        R.drawable.new_york_city_3
+    };
+    private int currentImage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        helper = new GlassActionBarHelper().contentLayout(R.layout.activity_fixed_header);
+        helper = new GlassActionBarHelper().contentLayout(R.layout.activity_changing_content);
         setContentView(helper.createView(this));
+        imageView = (ImageView) findViewById(R.id.imageView);
+    }
+    
+    public void changeImage(View view) {
+        imageView.setImageResource(IMAGES[++currentImage % IMAGES.length]);
+        helper.invalidate();
     }
 
     @Override

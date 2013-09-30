@@ -1,4 +1,4 @@
-package com.manuelpeinado.glassactionbardemo;
+package com.manuelpeinado.glassaction.samples.actionbarsherlock;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
