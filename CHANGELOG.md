@@ -1,8 +1,12 @@
 Change Log
 =======================================
 
+Version 0.3.0 *(2013-10-06)*
+----------------------------
 
-Version 0.2.1 *(2013-07-?)*
+ * Revamped project structure, now all AB types (stock, sherlock, compat) are under the same repo. Stock AB support in in the main library, whereas other types are in the "extras" folder.
+
+Version 0.2.1 *(2013-07-15)*
 ----------------------------
 
  * Added support for changing content (through the "invalidate" method).
