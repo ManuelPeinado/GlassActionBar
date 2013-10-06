@@ -21,8 +21,6 @@ Or browse the [source code of the sample application][3] for a complete example 
 Including in your project
 -------------------------
 
-##Gradle users
-
 The library is pushed to Maven Central as a AAR, so you just need to add the following dependency to your `build.gradle`.
     
     dependencies {
