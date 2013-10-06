@@ -3,7 +3,7 @@ GlassActionBar
 
 GlassActionBar is a tiny library which implements a glass-like effect for the action bar.
 
-This library is based on techniques outlined by Nicolas Pometuy in [a recent blog post][1].
+This library is based on techniques outlined by Nicolas Pomepuy in [a recent blog post][1].
 
 For reasons of backwards compatibility this library relies on ActionBarSherlock. Native action bar support is in the works.
 
@@ -85,9 +85,9 @@ License
 
  [1]: http://nicolaspomepuy.fr/?p=18
  [2]: https://raw.github.com/ManuelPeinado/GlassActionBar/master/art/readme_pic.png
- [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample
+ [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/glassactionbar-sample
  [4]: https://github.com/mosabua/maven-android-sdk-deployer
- [5]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/sample/src/com/manuelpeinado/glassactionbardemo/
+ [5]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/glassactionbar-sample/src/com/manuelpeinado/glassactionbardemo
  [6]: http://www.quasimondo.com/
  [7]: https://plus.google.com/107352914145283602089
  [8]: http://www.cyrilmottier.com
