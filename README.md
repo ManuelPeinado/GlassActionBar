@@ -1,11 +1,11 @@
 GlassActionBar
 ==================
 
-GlassActionBar is a tiny library which implements a glass-like effect for the action bar.
+GlassActionBar is an Android library which implements a glass-like effect for the action bar. 
 
-This library is based on techniques outlined by Nicolas Pomepuy in [a recent blog post][1].
+The three most commony used action bar implementations are supported: stock (API >13), ActionBarCompat and ActionBarSherlock. 
 
-For reasons of backwards compatibility this library relies on ActionBarSherlock. Native action bar support is in the works.
+The code of this library is based on techniques outlined by Nicolas Pomepuy in [a recent blog post][1].
 
 ![Example Image][2]
 
@@ -21,9 +21,22 @@ Or browse the [source code of the sample application][3] for a complete example 
 Including in your project
 -------------------------
 
-* **Eclipse ADT users**: add the library to your workspace as a library project, using the "New > Project > Android project from existing code" command. In the new project's preferences, mark it as a library project and add a reference to ActionBarSherlock, which should be in your workspace. Then reference the new library project from your application project.
-* **Maven users**: I'm not uploading the library to maven central because Google hasn't made the Android 4.2 artifacts available there (don't ask me why). So you'll have to install the library to your local repo as an apklib using 'mvn install:install-file'. Oh, and you probably know this already, but to be able to compile aginst Android 4.2 you'll have to use [this][4]. Fun, I know.
-* **Gradle/Android Studio users**: build the project (gradle build files are provided) and add the generated aar file to your application. I'm not a gradle expert and I have never used Android Studio, so easier options might be available.
+##Gradle users
+
+The library is pushed to Maven Central as a AAR, so you just need to add the following dependency to your `build.gradle`.
+    
+    dependencies {
+        compile 'com.github.manuelpeinado.glassactionbar:glassactionbar:0.3.0'
+    }
+    
+Or if your project doesn't use the stock action bar, but one of the compatibility implementations, you would use the following:
+
+    dependencies {
+        // Use the following if your project uses ActionBarCompat
+        compile 'com.github.manuelpeinado.glassactionbar:glassactionbar-abc:0.3.0'
+        // Or the following if your projet uses ActionBarSherlock
+        compile 'com.github.manuelpeinado.glassactionbar:glassactionbar-abs:0.3.0'
+    }
 
 Usage
 -----
@@ -37,7 +50,8 @@ Acknowledgements
 * Thanks to [Nicolas Pometuy][1] for sharing the techniques that make this library possible.
 * The gaussian blur effect is based on code by [Mario Klingemann][6] which was ported to Android by [Yahel Bouaziz][7].
 * NotifyingScrollView class by [Cyril Mottier][8].
-* Cat icon by [Davic Vignoni][9].
+* The project organization is heavily inspired by Chris Bane's [ActionBar-PullToRefresh][9] library.
+* Cat icon by [Davic Vignoni][10].
 
 Who's using it
 --------------
@@ -87,9 +101,10 @@ License
  [2]: https://raw.github.com/ManuelPeinado/GlassActionBar/master/art/readme_pic.png
  [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/glassactionbar-sample
  [4]: https://github.com/mosabua/maven-android-sdk-deployer
- [5]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/glassactionbar-sample/src/com/manuelpeinado/glassactionbardemo
+ [5]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/samples
  [6]: http://www.quasimondo.com/
  [7]: https://plus.google.com/107352914145283602089
  [8]: http://www.cyrilmottier.com
- [9]: http://www.icon-king.com/
+ [9]: https://github.com/chrisbanes/ActionBar-PullToRefresh  
+ [10]: http://www.icon-king.com/
 
