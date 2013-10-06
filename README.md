@@ -3,7 +3,7 @@ GlassActionBar
 
 GlassActionBar is an Android library which implements a glass-like effect for the action bar. 
 
-The three most commony used action bar implementations are supported: stock (API >13), ActionBarCompat and ActionBarSherlock. 
+The three most commonly used action bar implementations are supported: stock (API >13), ActionBarCompat and ActionBarSherlock. 
 
 The code of this library is based on techniques outlined by Nicolas Pomepuy in [a recent blog post][1].
 
