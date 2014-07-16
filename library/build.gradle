@@ -2,9 +2,13 @@ apply plugin: 'android-library'
 
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion '18.1'
-
+    compileSdkVersion 19
+    buildToolsVersion '19.1'
+ 
+    defaultConfig { 
+        targetSdkVersion 19
+    }
+    
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -12,7 +16,12 @@ android {
             res.srcDirs = ['res']
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
+
 
 apply from: '../maven_push.gradle'
 

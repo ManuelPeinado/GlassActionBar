@@ -1,12 +1,12 @@
 apply plugin: 'android'
 
 dependencies {
-    compile project(':extras/actionbarsherlock')
+    compile project(':extras-actionbarsherlock')
 }
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion '18.1'
+    compileSdkVersion 19
+    buildToolsVersion '19.1'
 
     defaultConfig {
         versionName project.VERSION_NAME

@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="TranslucentActionBar" parent="android:Widget.ActionBar">
+    <style name="TranslucentActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:background">@drawable/ab_transparent</item>
     </style>
 

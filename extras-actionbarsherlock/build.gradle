@@ -2,7 +2,7 @@ apply plugin: 'android-library'
 
 dependencies {
     compile project(':library')
-    compile "com.android.support:support-v4:[18.0,)"
+    compile 'com.android.support:support-v4:19.+'
     compile ("com.actionbarsherlock:actionbarsherlock:[4.4,)@aar") {
         // Need to specifically exclude this as it is specified in ActionBarSherlock pom
         exclude group: 'com.google.android', module: 'support-v4'
@@ -10,8 +10,8 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion '18.1'
+    compileSdkVersion 19
+    buildToolsVersion '19.1'
 
     sourceSets {
         main {
@@ -22,6 +22,6 @@ android {
     }
 }
 
-apply from: '../../maven_push.gradle'
+apply from: '../maven_push.gradle'
 
 

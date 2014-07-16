@@ -1,13 +1,17 @@
-apply plugin: 'android-library'
+apply plugin: 'android'
 
 dependencies {
     compile project(':library')
-    compile "com.android.support:appcompat-v7:[18.0,)"
 }
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion '18.1'
+    compileSdkVersion 19
+    buildToolsVersion '19.1'
+
+    defaultConfig {
+        versionName project.VERSION_NAME
+        versionCode Integer.parseInt(project.VERSION_CODE)
+    }
 
     sourceSets {
         main {
@@ -17,7 +21,3 @@ android {
         }
     }
 }
-
-apply from: '../../maven_push.gradle'
-
-

@@ -1,12 +1,12 @@
 apply plugin: 'android'
 
 dependencies {
-    compile project(':extras/actionbarcompat')
+    compile project(':extras-actionbarcompat')
 }
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion '18.1'
+    compileSdkVersion 19
+    buildToolsVersion '19.1'
 
     defaultConfig {
         versionName project.VERSION_NAME
@@ -19,5 +19,9 @@ android {
             java.srcDirs = ['src']
             res.srcDirs = ['res']
         }
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
