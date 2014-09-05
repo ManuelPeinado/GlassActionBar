@@ -39,17 +39,20 @@ Or if your project doesn't use the stock action bar, but one of the compatibilit
 Usage
 -----
 
-Using the library is really simple, just look at the source code of the [provided samples][5].
+Using the library is really simple, just look at the source code of the provided samples:
+* [Stock action bar][3].
+* [ActionBarCompat][4]
+* [ActionBarSherlock][5]
 
 
 Acknowledgements
 --------------------
 
-* Thanks to [Nicolas Pometuy][1] for sharing the techniques that make this library possible.
-* The gaussian blur effect is based on code by [Mario Klingemann][6] which was ported to Android by [Yahel Bouaziz][7].
-* NotifyingScrollView class by [Cyril Mottier][8].
-* The project organization is heavily inspired by Chris Bane's [ActionBar-PullToRefresh][9] library.
-* Cat icon by [Davic Vignoni][10].
+* Thanks to [Nicolas Pomepuy][1] for sharing the techniques that make this library possible.
+* The gaussian blur effect is based on code by [Mario Klingemann][8] which was ported to Android by [Yahel Bouaziz][9].
+* NotifyingScrollView class by [Cyril Mottier][10].
+* The project organization is heavily inspired by Chris Bane's [ActionBar-PullToRefresh][11] library.
+* Cat icon by [Davic Vignoni][12].
 
 Who's using it
 --------------
@@ -97,12 +100,14 @@ License
 
  [1]: http://nicolaspomepuy.fr/?p=18
  [2]: https://raw.github.com/ManuelPeinado/GlassActionBar/master/art/readme_pic.png
- [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/samples/stock 
- [4]: https://github.com/mosabua/maven-android-sdk-deployer
- [5]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/samples
- [6]: http://www.quasimondo.com/
- [7]: https://plus.google.com/107352914145283602089
- [8]: http://www.cyrilmottier.com
- [9]: https://github.com/chrisbanes/ActionBar-PullToRefresh  
- [10]: http://www.icon-king.com/
+ [3]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/samples-stock 
+ [4]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/samples-actionbarcompat
+ [5]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/extras-actionbarsherlock
+ [6]: https://github.com/mosabua/maven-android-sdk-deployer
+ [7]: https://github.com/ManuelPeinado/GlassActionBar/tree/master/samples
+ [8]: http://www.quasimondo.com/
+ [9]: https://plus.google.com/107352914145283602089
+ [10]: http://www.cyrilmottier.com
+ [11]: https://github.com/chrisbanes/ActionBar-PullToRefresh  
+ [12]: http://www.icon-king.com/
 
