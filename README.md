@@ -1,4 +1,5 @@
-GlassActionBar
+[![AndroidLibs](https://img.shields.io/badge/AndroidLibs-GlassActionBar-brightgreen.svg?style=flat)](https://www.android-libs.com/lib/glassactionbar?utm_source=github-badge&utm_medium=github-badge&utm_campaign=github-badge)
+			GlassActionBar
 ==================
 
 GlassActionBar is an Android library which implements a glass-like effect for the action bar. 
