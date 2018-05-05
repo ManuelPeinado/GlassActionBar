@@ -24,16 +24,16 @@ Including in your project
 The library is pushed to Maven Central as a AAR, so you just need to add the following dependency to your `build.gradle`.
     
     dependencies {
-        compile 'com.github.manuelpeinado.glassactionbar:glassactionbar:0.3.0'
+        implementation 'com.github.manuelpeinado.glassactionbar:glassactionbar:0.3.0'
     }
     
 Or if your project doesn't use the stock action bar, but one of the compatibility implementations, you would use the following:
 
     dependencies {
         // Use the following if your project uses ActionBarCompat
-        compile 'com.github.manuelpeinado.glassactionbar:glassactionbar-abc:0.3.0'
+        implementation 'com.github.manuelpeinado.glassactionbar:glassactionbar-abc:0.3.0'
         // Or the following if your project uses ActionBarSherlock
-        compile 'com.github.manuelpeinado.glassactionbar:glassactionbar-abs:0.3.0'
+        implementation 'com.github.manuelpeinado.glassactionbar:glassactionbar-abs:0.3.0'
     }
 
 Usage
